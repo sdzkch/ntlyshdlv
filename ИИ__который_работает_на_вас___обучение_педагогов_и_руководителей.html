@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ИИ, который работает на вас — обучение педагогов и руководителей</title>
+<meta name="description" content="Практическое обучение педагогов, методистов и руководителей работе с ИИ: программы, библиотека запросов, правила безопасной работы.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;500;600;700&family=Caveat:wght@700&display=swap">
+<style>
+:root{--bg:#F5F5F0;--card:#fff;--ink:#16203a;--mute:#5d647a;--line:#dcdcd2;--navy:#101C3A;--teal:#0A8F8F;--tl:#22d3c5;--vio:#6b5ce7;--soft:#e6e9f5;--btn:#101C3A;--btnt:#fff;--f:Geologica,"Segoe UI",Arial,sans-serif;--h:Caveat,"Segoe Script",cursive;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0b1020;--card:#151c36;--ink:#eaedf7;--mute:#9aa3bd;--line:#273050;--soft:#1a2243;--btn:#eaedf7;--btnt:#101C3A;--vio:#9a8dff;--teal:#2cc7c7}}
+:root[data-theme=dark]{--bg:#0b1020;--card:#151c36;--ink:#eaedf7;--mute:#9aa3bd;--line:#273050;--soft:#1a2243;--btn:#eaedf7;--btnt:#101C3A;--vio:#9a8dff;--teal:#2cc7c7}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:92px}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--f);overflow-x:hidden}
+h1,h2,h3,p{margin:0}h1,h2,h3{font-weight:600;letter-spacing:-.035em;line-height:1.05;text-wrap:balance}
+h1{font-size:clamp(44px,7.4vw,108px);font-weight:700;letter-spacing:-.06em;line-height:.93}
+h2{font-size:clamp(30px,4.8vw,62px)}h3{font-size:clamp(20px,2.2vw,27px)}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--vio);outline-offset:3px}
+.w{width:min(1180px,calc(100% - 40px));margin:0 auto}
+section{padding:96px 0}.s0{padding-top:20px}
+.lead{color:var(--mute);font-size:19px;max-width:54ch;margin-top:18px}
+.btn{display:inline-block;border:0;border-radius:99px;padding:15px 26px;font:500 16px var(--f);cursor:pointer;transition:transform .2s;background:var(--btn);color:var(--btnt)}
+.btn:hover{transform:translateY(-2px)}.bt{background:var(--tl);color:#06312f}.bo{background:none;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.hd{position:fixed;z-index:50;top:calc(12px + env(safe-area-inset-top,0px));left:0;right:0;margin:auto;width:min(1120px,calc(100% - 24px));display:flex;align-items:center;gap:14px;padding:8px 8px 8px 22px;border-radius:30px;background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:blur(16px);border:1px solid var(--line);flex-wrap:wrap}
+.hd>a:first-child{margin-right:auto}.hd>a b{font-weight:600}.hd nav{display:flex;gap:20px;font-size:14px;color:var(--mute);order:1}
+.hd nav a:hover,.hd nav a[aria-current=page]{color:var(--ink)}.hd nav a[aria-current=page]{box-shadow:0 2px 0 var(--vio)}
+.hd .btn{padding:11px 18px;font-size:14px;order:2}
+.ib{order:3;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:none;color:var(--ink);cursor:pointer;font-size:17px}.mb{display:none}
+.pg:not([hidden]){animation:in .45s ease}@keyframes in{from{opacity:0;transform:translateY(10px)}}
+.top{padding-top:150px}.top .lead{margin-top:20px}
+/* hero */
+.hero{position:relative;padding:150px 0 80px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(520px circle at var(--mx,72%) var(--my,35%),rgba(122,106,240,.2),rgba(34,211,197,.1) 45%,transparent 70%)}
+.hg{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.trust{margin-top:22px;font-size:14px;color:var(--mute)}
+.sheet{position:relative;background:#fffef8;color:#16203a;border-radius:6px 6px 22px 6px;padding:26px 28px 70px 64px;min-height:400px;overflow:hidden;transform:rotate(1.2deg);box-shadow:0 40px 70px -35px rgba(16,28,58,.5);background-image:repeating-linear-gradient(transparent 0 33px,#dfe6ef 33px 34px);background-position:0 18px}
+.sheet::before{content:"";position:absolute;left:44px;top:0;bottom:0;width:2px;background:rgba(34,211,197,.5)}
+.sl{font-size:13px;color:#7a8199}.pr{min-height:68px;font-size:19px;font-weight:500;line-height:34px;margin-bottom:6px}
+.pr::after{content:"";display:inline-block;width:2px;height:1.1em;background:var(--vio);vertical-align:-.15em;margin-left:3px;animation:bl 1s steps(2) infinite}.done .pr::after{display:none}@keyframes bl{50%{opacity:0}}
+.ln{font-size:17px;line-height:34px;opacity:0;transform:translateX(-8px);transition:opacity .4s,transform .4s}.ln.in{opacity:1;transform:none}
+.w2{background:linear-gradient(#6b5ce7,#6b5ce7) no-repeat 0 55%/0 2px;transition:background-size .5s,color .5s}.chk .w2{background-size:100% 2px;color:#8a90a8}
+.fx{display:inline-block;margin-left:8px;font:700 25px/1 var(--h);color:#5a4bd6;transform:rotate(-3deg);clip-path:inset(-4px 100% -4px 0);transition:clip-path .8s}.fix .fx{clip-path:inset(-4px -4px -4px 0)}
+.stamp{position:absolute;right:24px;bottom:20px;border:2px solid #0A8F8F;color:#0A8F8F;border-radius:10px;padding:2px 14px;font:700 25px var(--h);transform:rotate(-7deg) scale(1.5);opacity:0;transition:.35s}.done .stamp{opacity:1;transform:rotate(-7deg)}
+.sts{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 14px}.sts span{font-size:13px;padding:6px 13px;border-radius:99px;background:var(--soft);color:var(--mute);transition:.4s}.sts span.on{background:var(--btn);color:var(--btnt)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{border:1px solid var(--line);background:none;color:var(--ink);border-radius:99px;padding:8px 15px;font:400 14px var(--f);cursor:pointer}.chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.mq{overflow:hidden;background:var(--navy);color:#fff;padding:20px 0;font-size:clamp(20px,3vw,32px);font-weight:500;letter-spacing:-.02em}
+.mq div{display:flex;gap:44px;width:max-content;animation:mv 45s linear infinite}.mq span::after{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--tl);margin-left:44px}@keyframes mv{to{transform:translateX(-50%)}}
+/* blocks */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:48px}
+.tile{border-radius:30px;padding:32px;display:flex;flex-direction:column;justify-content:space-between;gap:34px;min-height:280px;color:#fff}.tile p{font-size:16px;opacity:.85;margin-top:10px}
+.tile ul,.cs,.ul{margin:0;padding:0;list-style:none}.tile ul{font-size:15px;display:grid;gap:6px}.tile li::before{content:"+ ";opacity:.6}
+.t1{grid-column:span 3;background:var(--navy)}.t2{grid-column:span 3;background:#5b4ddb}.t3{grid-column:span 4;background:#0b7d7d}.t4{grid-column:span 2;background:var(--card);border:1px solid var(--line);color:var(--ink)}
+.dk{background:var(--navy);color:#fff;border-radius:44px;margin:0 12px}.dk .lead,.dk label{color:#b4bddb}
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:44px;align-items:center}
+.calc label{display:block;font-size:15px;margin-top:22px}.calc label b{color:#fff;float:right}
+input[type=range]{width:100%;accent-color:var(--tl);margin-top:8px}
+.huge{font-size:clamp(64px,12vw,170px);font-weight:700;letter-spacing:-.07em;line-height:.92;color:var(--tl)}.cap{color:#8e9bc4;font-size:14px;margin-top:10px;max-width:44ch}
+.big{font-size:clamp(22px,3vw,38px);font-weight:500;letter-spacing:-.03em;line-height:1.16;max-width:24ch;margin-top:56px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.cs li{padding:18px 0;border-top:1px solid var(--line);font-size:19px;font-weight:500}.cyc{margin-top:26px;font-size:clamp(22px,2.6vw,32px);font-weight:600;letter-spacing:-.03em;color:var(--teal)}
+.hand{font:700 1.4em/1 var(--h);color:var(--vio)}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:44px}
+.pc{border-radius:30px;padding:32px;background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column;gap:14px}
+.pc:nth-child(2){background:var(--soft)}.pc:nth-child(4){background:var(--navy);color:#fff;border:0}.pc:nth-child(4) p,.pc:nth-child(4) li{color:#c5cdea}
+.pc small{font-size:13px;color:var(--teal);font-weight:500}.pc p,.pc li{color:var(--mute);font-size:16px}.pc ul{margin:0;padding-left:18px}.pc .btn{align-self:flex-start;margin-top:auto}
+.meta{display:flex;gap:8px;flex-wrap:wrap}.meta span{font-size:13px;padding:5px 12px;border-radius:99px;border:1px solid currentColor;opacity:.75}
+details{border-top:1px solid var(--line);padding:18px 0}details:last-child{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-size:19px;font-weight:500;list-style:none;display:flex;justify-content:space-between;gap:16px}summary::after{content:"+";color:var(--vio);font-size:26px;line-height:1;transition:transform .25s}details[open] summary::after{transform:rotate(45deg)}details p{color:var(--mute);margin-top:12px;max-width:62ch}
+.qa{margin-top:36px}
+.fl{display:flex;gap:8px;flex-wrap:wrap;margin:36px 0 8px}
+.pl{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-top:20px}
+.pt{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:10px}.pt small{color:var(--teal);font-size:13px;font-weight:500}.pt p{font-size:15.5px;flex:1;color:var(--mute)}.pt .chip{align-self:flex-start}
+.bld{background:var(--navy);color:#fff;border-radius:36px;padding:clamp(26px,5vw,56px);margin-top:64px;display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.bld label{display:block;font-size:14px;color:#b4bddb;margin-top:14px}
+input,select,textarea{width:100%;margin-top:6px;padding:13px 16px;border:1.5px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink);font:16px var(--f)}
+.bld input,.bld select{border-color:#34406a}
+.out{white-space:pre-wrap;background:#fffef8;color:#16203a;border-radius:18px;padding:22px;font-size:15.5px;min-height:230px}
+.tl3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}
+.tl3>div{border-radius:26px;padding:28px;border:1px solid var(--line);background:var(--card)}.tl3 h3{margin-bottom:12px}.tl3 li{margin-bottom:6px;font-size:15.5px}.tl3 .g{border-color:#0b7d7d;box-shadow:inset 0 5px 0 #22b26b}.tl3 .y{box-shadow:inset 0 5px 0 #f0b429}.tl3 .r{box-shadow:inset 0 5px 0 #e5484d}
+.ck{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-top:1px solid var(--line);cursor:pointer;font-weight:500}.ck input{width:22px;height:22px;margin:3px 0 0;accent-color:var(--teal);flex:none}
+.bar{height:12px;border-radius:9px;background:var(--soft);overflow:hidden;margin:22px 0 10px}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--vio),var(--tl));transition:width .5s}
+.tc{display:grid;grid-template-columns:.85fr 1.15fr;gap:64px;align-items:center}
+.ph{aspect-ratio:4/5;border-radius:44px;background:linear-gradient(160deg,var(--soft),#b9c3e6);display:grid;place-items:end center;overflow:hidden;position:relative}.ph svg{width:80%}.ph span{position:absolute;top:18px;font-size:13px;color:#5d647a}
+.st{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:30px 0}.st b{display:block;font-size:clamp(42px,5.6vw,72px);font-weight:700;letter-spacing:-.05em;line-height:1}.st span{font-size:14px;color:var(--mute)}
+blockquote{margin:0;font-size:clamp(20px,2.2vw,27px);font-weight:500;letter-spacing:-.02em;line-height:1.3}.note{font-size:13px;color:var(--mute);margin-top:14px}
+.rv{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:14px;margin-top:44px}.rv figure{margin:0;border-radius:30px;padding:32px;background:var(--card);border:1px solid var(--line)}
+.rv figure:first-child{background:#5b4ddb;color:#fff;border:0}.rv figure:first-child p{font-size:22px}.rv figcaption{margin-top:20px;font-size:14px;opacity:.75}.rv b{display:block}
+.gf{border-radius:44px;background:linear-gradient(135deg,var(--navy),#2b2f77);color:#fff;padding:clamp(28px,6vw,72px);display:grid;grid-template-columns:1.2fr 1fr;gap:44px;align-items:center}.gf .lead{color:#b9c1e0}
+.fm{display:flex;gap:8px;background:#fff;border-radius:99px;padding:6px}.fm input{border:0;background:none;margin:0;color:#16203a}
+.ok{margin-top:14px;font-weight:500;color:var(--tl)}
+.enr{max-width:600px;display:grid;gap:12px;margin-top:34px}.enr label{font-size:14px;color:var(--mute)}.enr .ok{color:var(--teal)}
+.ct{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:start}
+.fin{text-align:center}.fin h2{font-size:clamp(36px,7vw,96px);letter-spacing:-.05em;max-width:14ch;margin:0 auto}.fin .lead{margin-inline:auto}
+footer{padding:36px 0;border-top:1px solid var(--line);font-size:14px;color:var(--mute)}footer .w{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}footer nav{display:flex;gap:18px;flex-wrap:wrap}
+.fx2{display:none}
+@media(max-width:900px){.hd nav{display:none;order:4;width:100%;flex-direction:column;gap:0;padding:6px 0 10px}.hd.open nav{display:flex}.hd nav a{padding:12px 4px;border-top:1px solid var(--line);font-size:16px}.hd nav a[aria-current=page]{box-shadow:none;color:var(--vio)}.mb{display:block}.hd{padding-left:20px}
+.hg,.two,.tc,.gf,.calc,.bld,.ct{grid-template-columns:1fr}.rv,.tl3,.pgrid{grid-template-columns:1fr}.t1,.t2,.t3,.t4{grid-column:span 6;min-height:0}section{padding:68px 0}.hero{padding-top:120px}.top{padding-top:118px}.ph{max-width:340px}.sheet{transform:none}.calc{gap:30px}}
+@media(max-width:560px){.fx2{display:block;position:fixed;left:16px;right:16px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:60;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.25)}.hd .btn{display:none}body{padding-bottom:76px}.sheet{padding:22px 18px 70px 50px;min-height:430px}.sheet::before{left:34px}.dk{margin:0 6px;border-radius:30px}.fm{flex-direction:column;border-radius:26px}.fm input{padding:12px 14px}.pl{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+#sp{position:fixed;top:0;left:0;height:3px;width:100%;z-index:80;background:linear-gradient(90deg,var(--vio),var(--tl));transform:scaleX(0);transform-origin:0 50%}
+#cv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+#p-home h1{background:linear-gradient(100deg,var(--ink) 25%,var(--vio) 45%,var(--tl) 55%,var(--ink) 75%) 0 0/250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:gs 9s linear infinite}@keyframes gs{to{background-position:-250% 0}}
+.rv2{opacity:0;transform:translateY(28px) scale(.97);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}.rv2.on{opacity:1;transform:none}
+.tl{transform:perspective(800px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s}
+.cw{margin-top:44px;background:var(--card);border:1px solid var(--line);border-radius:30px;padding:clamp(16px,3vw,32px)}.ch{width:100%;height:auto;display:block;color:var(--mute);font:13px var(--f)}
+.ch .l{fill:none;stroke:var(--vio);stroke-width:4;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}.ch.on .l{stroke-dashoffset:0;transition:stroke-dashoffset 2.2s cubic-bezier(.4,0,.2,1)}
+.ch .a{opacity:0;transition:opacity 1s 1.4s}.ch.on .a{opacity:1}.ch circle{fill:var(--card);stroke:var(--tl);stroke-width:3;opacity:0;transition:opacity .4s}.ch.on circle{opacity:1}
+#adm{position:fixed;z-index:90;right:12px;top:calc(76px + env(safe-area-inset-top,0px));width:min(340px,calc(100% - 24px));max-height:calc(100% - 96px);overflow:auto;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:24px;padding:18px;box-shadow:0 30px 70px -20px rgba(0,0,0,.45);font-size:14px}#adm[hidden]{display:none}
+#adm h3{font-size:16px;margin:16px 0 6px}#adm label{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:8px 0}#adm input,#adm select,#adm textarea{margin:0;padding:8px 10px;font-size:14px;width:auto;max-width:170px}#adm input[type=color]{width:44px;height:30px;padding:0}#adm input[type=checkbox],#adm input[type=range]{padding:0}#adm textarea{width:100%;max-width:none}#adm .btn{padding:9px 14px;font-size:13px}
+.edit [contenteditable=true]{outline:1px dashed var(--vio);outline-offset:3px;cursor:text}.edit [contenteditable=true]:focus{outline:2px solid var(--tl)}.adm .fx2{display:none!important}
+@media(max-width:560px){#adm{top:auto;bottom:calc(12px + env(safe-area-inset-bottom,0px));max-height:62%}}
+.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin-top:40px}
+.cc{background:var(--card);border:1px solid var(--line);border-radius:30px;overflow:hidden;display:flex;flex-direction:column}
+.cc .vd{aspect-ratio:16/9;width:100%;border:0;background:#000;display:block}.cc>div{padding:24px;display:grid;gap:10px}.cc p{color:var(--mute);font-size:16px;white-space:pre-line}
+.lo{display:none}.adm .lo{display:inline-block}.hd .lo{padding:11px 18px;font-size:14px;order:2}
+#adm .cf input,#adm .cf textarea{width:100%;max-width:none;margin:6px 0}#adm .cf .note{margin:6px 0}
+#kl>div{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:6px 0;border-top:1px solid var(--line)}#kl>div>span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}#kl .chip{padding:4px 10px}
+#gp{height:6px;border-radius:9px;background:var(--soft);overflow:hidden;margin:6px 0}#gp i{display:block;height:100%;width:0;background:var(--vio);transition:width .2s}
+</style>
+</head>
+<body>
+<div id="sp"></div>
+<header class="hd" id="hd"><a href="#/" data-r="home"><b>Имя Фамилия</b></a>
+<nav id="nv"><a href="#/programs" data-r="programs">Программы</a><a href="#/courses" data-r="courses">Курсы</a><a href="#/prompts" data-r="prompts">Запросы к ИИ</a><a href="#/safety" data-r="safety">Безопасность</a><a href="#/about" data-r="about">О преподавателе</a><a href="#/enroll" data-r="enroll">Контакты и FAQ</a></nav>
+<a class="btn" href="#/enroll" data-r="enroll">Записаться</a>
+<button class="btn bo lo" type="button">Выйти</button>
+<button class="ib" id="th" aria-label="Сменить тему">◐</button><button class="ib mb" id="mb" aria-expanded="false" aria-controls="nv" aria-label="Меню">☰</button></header>
+<main>
+<!-- ГЛАВНАЯ -->
+<div class="pg" id="p-home">
+<section class="hero" id="hero"><canvas id="cv" aria-hidden="true"></canvas><div class="w hg">
+<div><h1>ИИ, который работает на вас</h1>
+<p class="lead">ИИ делает черновик. Решение остаётся за педагогом. Практическое обучение педагогов, методистов и руководителей — от первой идеи до готового результата.</p>
+<div class="row"><a class="btn" href="#/programs">Выбрать программу</a><a class="btn bo" href="#/prompts">Попробовать запросы</a></div>
+<p class="trust">Для педагогов, руководителей, методистов и специалистов учреждений образования</p></div>
+<div><div class="sheet" id="sheet"><p class="sl">Запрос</p><p class="pr" id="pr" aria-live="polite"></p><div id="ls"></div><div class="stamp" aria-hidden="true">проверено педагогом</div></div>
+<div class="sts" id="sts"><span>задача</span><span>запрос</span><span>проверка</span><span>доработка</span><span>готовый результат</span></div>
+<div class="chips" id="chips" role="group" aria-label="Выберите задачу"></div></div></div></section>
+<div class="mq" aria-hidden="true"><div id="mq"></div></div>
+<section><div class="w"><h2>Не изучайте ИИ ради ИИ. Решайте им рабочие задачи.</h2><p class="lead">ИИ — не вместо педагога, а в помощь педагогу. Выберите свою роль.</p>
+<div class="bento">
+<div class="tile t1"><div><h3>Педагогу</h3><p>Подготовка занятий, заданий, презентаций, методических материалов.</p></div><ul><li>планирование занятий</li><li>задания и тесты</li><li>индивидуализация обучения</li></ul></div>
+<div class="tile t2"><div><h3>Методисту</h3><p>Анализ информации, документы, рекомендации, мониторинг.</p></div><ul><li>анализ документов</li><li>методические рекомендации</li><li>аналитические материалы</li></ul></div>
+<div class="tile t3"><div><h3>Руководителю</h3><p>Планирование, управление, документы, коммуникация.</p></div><ul><li>управленческие документы и отчёты</li><li>планирование работы коллектива</li><li>решения на основе данных</li></ul></div>
+<div class="tile t4"><div><h3>Специалисту</h3><p>Современные цифровые и профессиональные навыки.</p></div><ul><li>таблицы и тексты</li><li>автоматизация рутины</li></ul></div></div></div></section>
+<section class="dk"><div class="w"><h2>Сколько времени вернётся вам</h2><p class="lead">Передвиньте ползунки — это ориентир на основе примера «3 часа → 40 минут». Реальный результат зависит от задачи.</p>
+<div class="calc"><div>
+<label for="r1">Материалов в неделю (занятия, документы, отчёты)<b id="o1"></b></label><input type="range" id="r1" min="1" max="20" value="5">
+<label for="r2">Часов на подготовку одного сейчас<b id="o2"></b></label><input type="range" id="r2" min="1" max="6" step=".5" value="3"></div>
+<div><div class="huge" id="res"></div><p class="cap" id="cap"></p></div></div>
+<p class="big">Вы не просто узнаете о новых технологиях. Вы научитесь применять их в своей работе.</p></div></section>
+<section class="s0"><div class="w"><h2>Как растёт уверенность</h2><p class="lead">Пример динамики по неделям обучения — ориентир, а не статистика.</p><div class="cw"><svg class="ch" id="ch" viewBox="0 0 640 260" role="img" aria-label="График: уверенность в работе с ИИ растёт от 20% до 95% за шесть недель"><defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6b5ce7" stop-opacity=".35"/><stop offset="1" stop-color="#6b5ce7" stop-opacity="0"/></linearGradient></defs><g stroke="currentColor" opacity=".18"><path d="M40 230H610M40 160H610M40 90H610M40 20H610"/></g><path class="a" fill="url(#g1)" d="M40 190C100 185 110 165 152 160S220 135 264 126S330 100 376 90S440 70 488 62S560 45 600 40L600 230L40 230Z"/><path class="l" pathLength="1" d="M40 190C100 185 110 165 152 160S220 135 264 126S330 100 376 90S440 70 488 62S560 45 600 40"/><circle cx="40" cy="190" r="6" style="transition-delay:.3s"/><circle cx="152" cy="160" r="6" style="transition-delay:.7s"/><circle cx="264" cy="126" r="6" style="transition-delay:1.1s"/><circle cx="376" cy="90" r="6" style="transition-delay:1.5s"/><circle cx="488" cy="62" r="6" style="transition-delay:1.9s"/><circle cx="600" cy="40" r="6" style="transition-delay:2.3s"/><g fill="currentColor" text-anchor="middle"><text x="40" y="252">старт</text><text x="264" y="252">3 неделя</text><text x="600" y="252">6 неделя</text></g></svg></div></div></section>
+<section><div class="w"><h2>От первых шагов до системной работы</h2><p class="lead">Мы изучаем не сервисы, а решение профессиональных задач. На каждом занятии — результат, который можно использовать в работе.</p>
+<div class="pgrid" id="hp"></div><div class="row"><a class="btn bo" href="#/programs">Подробно о программах</a></div></div></section>
+<section class="s0"><div class="w two"><div><h2>Не теория. Реальные задачи.</h2><p class="cyc">Создаём, проверяем, редактируем, применяем</p><p class="lead">ИИ не заменяет педагога. Он освобождает время для работы, которую должен выполнять педагог. Меньше рутины, больше профессиональной работы.</p></div>
+<ul class="cs"><li>Педагог готовит занятие и задания</li><li>Группа коллег отрабатывает запросы</li><li>Мастер-класс: задача, запрос, проверка</li><li>Руководитель готовит документ и отчёт</li><li>Разбор результата: что принять, что исправить</li></ul></div></section>
+<section class="s0"><div class="w"><div class="gf"><div><h2 style="font-size:clamp(28px,4vw,52px)">Бесплатно: 50 запросов к ИИ для педагога</h2><p class="lead">Готовые формулировки для планов занятий, заданий и документов. Плюс подборка «20 задач руководителя».</p></div>
+<div><form class="fm" id="f1"><input type="email" required placeholder="Ваш email" aria-label="Email"><button class="btn bt" type="submit">Получить</button></form><p class="ok" id="ok1" role="status" hidden>Спасибо! Материал отправлен на email.</p><p class="note" style="color:#b9c1e0">Или попробуйте часть запросов прямо сейчас — <a href="#/prompts" style="text-decoration:underline">в библиотеке</a>.</p></div></div></div></section>
+</div>
+
+<!-- ПРОГРАММЫ -->
+<div class="pg" id="p-programs" hidden><section class="top"><div class="w"><h1 style="font-size:clamp(40px,6.4vw,90px)">Программы обучения</h1><p class="lead">Четыре уровня — от первых запросов до системной работы руководителя. Каждый заканчивается готовыми материалами для вашей работы.</p>
+<div class="pgrid" id="pp"></div><p class="note">Сроки, формат и стоимость уточняйте у преподавателя — здесь указаны примеры, замените на реальные.</p></div></section>
+<section class="s0"><div class="w"><h2>Как проходит обучение</h2><ul class="cs" style="margin-top:30px;max-width:760px"><li>1. Вы называете рабочую задачу</li><li>2. Вместе составляем запрос и получаем черновик</li><li>3. Проверяем факты и логику — решение за вами</li><li>4. Дорабатываем и сохраняем в личную библиотеку</li></ul><div class="row"><a class="btn" href="#/enroll">Записаться на обучение</a></div></div></section></div>
+
+<!-- ЗАПРОСЫ -->
+<div class="pg" id="p-prompts" hidden><section class="top"><div class="w"><h1 style="font-size:clamp(40px,6.4vw,90px)">Библиотека запросов</h1><p class="lead">Готовые формулировки для работы. Замените многоточия своими данными, скопируйте и вставьте в любой ИИ-сервис. Не добавляйте в запрос персональные данные детей.</p>
+<div class="fl" id="fl" role="group" aria-label="Фильтр по роли"></div><div class="pl" id="pl"></div>
+<div class="bld"><div><h2 style="font-size:clamp(26px,3.6vw,44px)">Конструктор запроса</h2><p class="lead">Хороший запрос — это роль, задача, контекст, формат и ограничения. Заполните поля — получите готовый текст.</p>
+<label for="b1">Кто вы</label><select id="b1"><option>педагог начальных классов</option><option>учитель-предметник</option><option>методист</option><option>заместитель директора</option><option>директор учреждения образования</option></select>
+<label for="b2">Задача</label><input id="b2" value="составить план занятия по теме «…»">
+<label for="b3">Контекст (класс, цель, ограничения по времени)</label><input id="b3" value="5 класс, 45 минут, цель — закрепить тему">
+<label for="b4">Формат результата</label><select id="b4"><option>таблица</option><option>нумерованный список</option><option>краткий текст до 150 слов</option><option>чек-лист</option></select></div>
+<div><div class="out" id="out" aria-live="polite"></div><div class="row"><button class="btn bt" id="cb" type="button">Скопировать запрос</button></div></div></div></div></section></div>
+
+<!-- БЕЗОПАСНОСТЬ -->
+<div class="pg" id="p-safety" hidden><section class="top"><div class="w"><h1 style="font-size:clamp(40px,6.4vw,90px)">ИИ без рисков</h1><p class="lead">Нейросеть может ошибаться, а данные — утекать. Три простых правила помогают пользоваться ИИ спокойно.</p>
+<div class="tl3"><div class="g"><h3>Можно</h3><ul class="ul"><li>открытые учебные темы</li><li>свои черновики без данных учеников</li><li>типовые формулировки документов</li></ul></div>
+<div class="y"><h3>Осторожно</h3><ul class="ul"><li>обезличенные результаты диагностики</li><li>внутренние документы — по правилам организации</li><li>текст, который пойдёт к родителям</li></ul></div>
+<div class="r"><h3>Нельзя</h3><ul class="ul"><li>ФИО, адреса, телефоны</li><li>оценки и характеристики конкретных детей</li><li>медицинские и иные личные сведения</li></ul></div></div>
+<div class="two" style="margin-top:80px;align-items:start"><div><h2 style="font-size:clamp(28px,4vw,50px)">Чек-лист педагога</h2><p class="lead">Отметьте, что вы уже делаете. Прогресс покажет, куда расти.</p><div class="bar"><i id="pb"></i></div><p id="pt" class="note" style="font-size:15px"></p></div>
+<div id="ckl"></div></div></div></section></div>
+
+<!-- О ПРЕПОДАВАТЕЛЕ -->
+<div class="pg" id="p-about" hidden><section class="top"><div class="w tc"><div class="ph"><span>Фото преподавателя</span><svg viewBox="0 0 200 220" aria-hidden="true"><circle cx="100" cy="78" r="44" fill="#8f9cc4"/><path d="M10 220c4-62 40-90 90-90s86 28 90 90z" fill="#101C3A"/></svg></div>
+<div><h1 style="font-size:clamp(38px,5.6vw,80px)">Ваш преподаватель</h1><p class="lead">Имя Фамилия — преподаватель-практик, эксперт по цифровой трансформации образования. Здесь краткое описание: опыт, регалии, с кем работает.</p>
+<div class="st"><div><b>10+</b><span>лет в образовании</span></div><div><b>500+</b><span>обученных педагогов</span></div><div><b>50+</b><span>программ и семинаров</span></div><div><b>100+</b><span>задач, решённых с ИИ</span></div></div>
+<blockquote>Моя задача — сделать технологии понятными, полезными и применимыми в реальной работе педагога.</blockquote><p class="note">Цифры — примеры, замените на реальные.</p></div></div></section>
+<section class="s0"><div class="w"><h2>Отзывы коллег</h2><div class="rv">
+<figure><p>«После обучения впервые поняла, как использовать ИИ не для экспериментов, а для ежедневной управленческой работы».</p><figcaption><b>Наталья Ивановна</b>Заместитель директора учреждения образования</figcaption></figure>
+<figure><p>«Отзыв педагога: какую задачу решали и сколько времени сэкономили».</p><figcaption><b>Имя Отчество</b>Должность, учреждение</figcaption></figure>
+<figure><p>«Отзыв методиста: что изменилось в работе с документами».</p><figcaption><b>Имя Отчество</b>Должность, учреждение</figcaption></figure></div>
+<p class="note">Фото и данные учреждений — только с разрешения авторов. Сюда можно добавить видеоотзывы.</p></div></section></div>
+
+<!-- ЗАПИСЬ -->
+<div class="pg" id="p-enroll" hidden><section class="top"><div class="w ct"><div><h1 style="font-size:clamp(38px,5.6vw,80px)">Готовы использовать ИИ в своей работе?</h1><p class="lead">Начните с одной задачи. Освойте один инструмент. Получите первый результат.</p>
+<form class="enr" id="f2"><label>Имя<input name="n" required autocomplete="name"></label><label>Email или телефон<input name="c" required autocomplete="email"></label>
+<label>Программа<select name="p" id="sel"></select></label><label>Ваша рабочая задача (по желанию)<textarea name="t" rows="3"></textarea></label>
+<button class="btn" type="submit" style="justify-self:start">Отправить заявку</button><p class="ok" id="ok2" role="status" tabindex="-1" hidden>Открылось письмо с вашей заявкой. Отправьте его, и я свяжусь с вами.</p></form></div>
+<div><h2 style="font-size:clamp(26px,3.4vw,40px)">Частые вопросы</h2><div class="qa" id="qa"></div><p class="note" style="margin-top:24px">hello@example.com · Telegram @username</p></div></div></section></div>
+<div class="pg" id="p-courses" hidden><section class="top"><div class="w"><h1 style="font-size:clamp(40px,6.4vw,90px)">Курсы</h1><p class="lead">Видеокурсы и материалы — смотрите онлайн прямо на сайте.</p><div class="cg" id="cg"></div></div></section></div>
+<div class="pg" id="p-admin" hidden><section class="top"><div class="w" style="max-width:560px"><h1 style="font-size:clamp(36px,5vw,64px)">Конструктор</h1><p class="lead">Войдите, чтобы редактировать сайт в реальном времени: тексты, цвета, шрифт, секции, фото.</p><form class="enr" id="f3"><label>Пароль<input type="password" id="pw" required autocomplete="current-password"></label><button class="btn" type="submit" style="justify-self:start">Войти</button><p class="ok" id="bad" hidden style="color:#e5484d">Неверный пароль</p></form><p class="note">Пароль по умолчанию: admin. Это демо-защита в браузере, а не настоящая безопасность.</p></div></section></div>
+</main>
+<footer><div class="w"><span>© 2026 Имя Фамилия</span><nav><a href="#/programs">Программы</a><a href="#/courses">Курсы</a><a href="#/prompts">Запросы</a><a href="#/safety">Безопасность</a><a href="#/about">О преподавателе</a><a href="#/enroll">Контакты</a><a href="#/admin">Вход для редактора</a></nav></div></footer>
+<a class="btn fx2" href="#/enroll">Записаться</a>
+<aside id="adm" aria-label="Панель конструктора" hidden><div style="display:flex;justify-content:space-between;align-items:center"><h3 style="margin:0">Конструктор</h3><span style="display:flex;gap:8px;align-items:center"><button class="btn bo lo" type="button">Выйти</button><button class="ib" id="ax" aria-label="Свернуть" style="width:34px;height:34px">✕</button></span></div>
+<label>Править текст на странице<input type="checkbox" id="ae" checked></label>
+<h3>Цвета</h3><label>Акцент<input type="color" id="c1"></label><label>Второй акцент<input type="color" id="c2"></label><label>Тёмные блоки<input type="color" id="c3"></label>
+<h3>Типографика</h3><label>Шрифт<select id="ft"><option value="">Geologica</option><option value="Georgia,serif">Georgia</option><option value="Arial,sans-serif">Arial</option><option value="'Courier New',monospace">Courier</option></select></label><label>Размер текста<input type="range" id="fs" min="15" max="20"></label>
+<h3>Эффекты</h3><label>Частицы в шапке<input type="checkbox" id="e1"></label><label>Появление при прокрутке<input type="checkbox" id="e2"></label><label>3D-наклон карточек<input type="checkbox" id="e3"></label>
+<h3>Секции главной</h3><div id="sc"></div>
+<h3>Контакты и фото</h3><label>Email заявок<input id="ml"></label><label>Фото преподавателя<input type="file" id="ph" accept="image/*"></label><label>Новый пароль<input id="np" placeholder="не менять"></label>
+<h3>Курсы</h3><div class="cf"><input id="kt" maxlength="120" placeholder="Название курса" aria-label="Название курса"><textarea id="kd" rows="3" placeholder="Описание курса" aria-label="Описание курса"></textarea><input id="kv" placeholder="Видео: ссылка Google Диск, YouTube, Vimeo или .mp4" aria-label="Ссылка на видео">
+<label>Загрузить видео на Google Диск<input type="file" id="kf" accept="video/*"></label><div id="gp" hidden><i></i></div><p class="note" id="gs" role="status">Без Client ID: загрузите видео на drive.google.com, откройте доступ «Всем, у кого есть ссылка» и вставьте ссылку выше.</p>
+<input id="gid" placeholder="Google OAuth Client ID (для загрузки отсюда)" aria-label="Google OAuth Client ID"><div class="row" style="margin-top:8px"><button class="btn" id="kb" type="button">Добавить курс</button><button class="btn bo" id="kc" type="button" hidden>Отмена</button><a class="btn bo" href="https://drive.google.com/drive/my-drive" target="_blank" rel="noopener">Открыть Диск</a></div><div id="kl"></div></div>
+<h3>Данные</h3><textarea id="js" rows="3" aria-label="JSON настроек"></textarea><div class="row" style="margin-top:10px"><button class="btn bo" id="jc" type="button">Скопировать</button><button class="btn bo" id="ja" type="button">Применить</button><button class="btn bo" id="jr" type="button">Сбросить</button></div><p class="note" id="sv">Изменения сохраняются автоматически в этом браузере.</p><button class="btn lo" type="button" style="margin-top:8px">Выйти</button></aside>
+<button class="ib" id="af" aria-label="Открыть конструктор" hidden style="position:fixed;z-index:90;left:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));background:var(--card)">⚙</button>
+<script>
+var $=function(i){return document.getElementById(i)},Q=function(s){return[].slice.call(document.querySelectorAll(s))};
+var R={home:"Главная",programs:"Программы",prompts:"Запросы к ИИ",safety:"Безопасность",about:"О преподавателе",enroll:"Контакты и FAQ",admin:"Конструктор",courses:"Курсы"};
+var PR=[["Старт","ИИ-инструменты для педагога","Для тех, кто только начинает: первые запросы и первые готовые материалы.","4 занятия","онлайн или очно",["как устроен запрос","план занятия и задания","проверка результата"]],
+["Практика","ИИ в профессиональной деятельности","Для тех, кто знаком с основами: реальные рабочие задачи и алгоритмы.","6 занятий","практикум",["презентации и тексты","работа с документами","личная библиотека запросов"]],
+["Продвинутый уровень","Образовательный контент и автоматизация","Для педагогов и методистов, которые хотят применять технологии системно.","8 занятий","проект",["образовательный контент","автоматизация рутины","таблицы и анализ"]],
+["Управление","ИИ для руководителя образовательной организации","Для директоров, заместителей и руководителей структурных подразделений.","6 занятий","для руководителей",["управленческие документы","планирование и отчёты","правила ИИ в организации"]]];
+function card(p,i,full){return'<div class="pc"><small>'+p[0]+'</small><h3>'+p[1]+'</h3><p>'+p[2]+'</p>'+(full?'<ul>'+p[5].map(function(x){return'<li>'+x+'</li>'}).join("")+'</ul><div class="meta"><span>'+p[3]+'</span><span>'+p[4]+'</span></div>':'')+'<a class="btn" href="#/enroll" data-p="'+i+'">Выбрать</a></div>'}
+$("hp").innerHTML=PR.map(function(p,i){return card(p,i,0)}).join("");$("pp").innerHTML=PR.map(function(p,i){return card(p,i,1)}).join("");
+$("sel").innerHTML=PR.map(function(p){return"<option>"+p[1]+"</option>"}).join("");
+document.addEventListener("click",function(e){var a=e.target.closest("[data-p]");if(a)$("sel").selectedIndex=+a.dataset.p});
+var Mq=["Подготовить занятие","Сделать презентацию","Составить задание","Разобрать документ","Написать отчёт","Спланировать работу"];$("mq").innerHTML=Mq.concat(Mq).map(function(s){return"<span>"+s+"</span>"}).join("");
+/* FAQ */
+var FQ=[["Нужен ли опыт работы с ИИ?","Нет. Первая программа рассчитана на тех, кто начинает с нуля."],["Нужно ли платить за сервисы?","Начать можно с бесплатных возможностей. Что подойдёт именно вам — разберём на занятии."],["Можно ли обучать целый коллектив?","Да, для коллективов возможен отдельный формат. Напишите, и мы обсудим задачи вашей организации."],["Будут ли материалы после обучения?","Да, у вас останется личная библиотека запросов и шаблонов под ваши задачи."],["Что с персональными данными?","Мы учим работать без них: обезличивать информацию и проверять результат. См. раздел «Безопасность»."]];
+$("qa").innerHTML=FQ.map(function(q){return"<details><summary>"+q[0]+"</summary><p>"+q[1]+"</p></details>"}).join("");
+/* Библиотека */
+var P=[["Педагогу","План урока","Составь план урока на 45 минут по теме «…» для … класса: цель, этапы, задания трёх уровней сложности. Не добавляй фактов, в которых не уверен."],["Педагогу","Задания с критериями","Придумай 5 практических заданий по теме «…» с критериями оценивания и образцом ответа. Формат — таблица."],["Педагогу","Обратная связь","Вот работа ученика (без имени): … Сформулируй доброжелательную обратную связь: что получилось, что улучшить, один следующий шаг."],["Методисту","Анализ документа","Вот текст документа. Выдели сроки, ответственных и обязательные действия. Ответ — список до 7 пунктов."],["Методисту","Рекомендации","На основе текста ниже подготовь краткие методические рекомендации для педагогов: 5 пунктов, простым языком."],["Методисту","Выводы по диагностике","Вот обезличенные результаты диагностики. Назови три закономерности и что нужно проверить, прежде чем делать выводы."],["Руководителю","Структура отчёта","Вот мои заметки за полугодие. Составь структуру отчёта, не добавляя данных, которых в заметках нет."],["Руководителю","План работы","Составь план работы методического объединения на четверть таблицей: цель, срок, ответственный, результат."],["Руководителю","Письмо родителям","Напиши деловое, спокойное письмо родителям о … (до 120 слов). Тон — уважительный, без канцелярита."]];
+function cp(t,b,l){function ok(){var o=b.textContent;b.textContent="Скопировано ✓";setTimeout(function(){b.textContent=l||o},1600)}
+var f=function(){var a=document.createElement("textarea");a.value=t;a.style.position="fixed";document.body.appendChild(a);a.select();try{document.execCommand("copy")}catch(e){}a.remove();ok()};
+try{navigator.clipboard.writeText(t).then(ok,f)}catch(e){f()}}
+function lib(r){$("pl").innerHTML="";P.forEach(function(p){if(r!="Все"&&p[0]!=r)return;var d=document.createElement("div");d.className="pt";d.innerHTML="<small>"+p[0]+"</small><h3>"+p[1]+"</h3><p></p>";d.querySelector("p").textContent=p[2];var b=document.createElement("button");b.className="chip";b.type="button";b.textContent="Копировать";b.onclick=function(){cp(p[2],b,"Копировать")};d.appendChild(b);$("pl").appendChild(d)})}
+["Все","Педагогу","Методисту","Руководителю"].forEach(function(r,i){var b=document.createElement("button");b.className="chip";b.type="button";b.textContent=r;b.setAttribute("aria-pressed",i==0);b.onclick=function(){[].forEach.call($("fl").children,function(c){c.setAttribute("aria-pressed",c==b)});lib(r)};$("fl").appendChild(b)});lib("Все");
+/* Конструктор */
+function bd(){var t="Ты — "+$("b1").value+". Задача: "+$("b2").value+".\nКонтекст: "+$("b3").value+".\nФормат ответа: "+$("b4").value+".\nОграничения: не выдумывай факты и цифры; если данных не хватает — сначала задай мне уточняющие вопросы.";$("out").textContent=t;return t}
+["b1","b2","b3","b4"].forEach(function(i){$(i).oninput=bd;$(i).onchange=bd});bd();$("cb").onclick=function(){cp(bd(),$("cb"),"Скопировать запрос")};
+/* Калькулятор */
+function calc(){var n=+$("r1").value,h=+$("r2").value,s=Math.round(n*h*(1-40/180)*36);$("o1").textContent=n;$("o2").textContent=h+" ч";$("res").textContent="≈ "+s+" ч";$("cap").textContent="примерно столько часов в год можно вернуть себе (36 учебных недель). Это ориентир, а не обещание.";}
+$("r1").oninput=$("r2").oninput=calc;calc();
+/* Чек-лист */
+var C=["Не вношу в ИИ ФИО, адреса и оценки конкретных детей","Проверяю факты, цифры и ссылки по первоисточнику","Итоговое решение и подпись оставляю за собой","Знаю правила своей организации по работе с ИИ","Отмечаю, где материал подготовлен с помощью ИИ, если это требуется","Сверяю результат с программой и стандартами"];
+$("ckl").innerHTML=C.map(function(c,i){return'<label class="ck"><input type="checkbox" data-c="'+i+'"><span>'+c+'</span></label>'}).join("");
+function pg(){var n=Q("[data-c]:checked").length;$("pb").style.width=n/C.length*100+"%";$("pt").textContent=n+" из "+C.length+(n==C.length?" — отлично, вы работаете с ИИ безопасно":n>3?" — хороший уровень, осталось немного":" — начните с первых пунктов")}
+$("ckl").onchange=pg;pg();
+/* Роутер */
+var hd=$("hd"),mb=$("mb");function menu(o){hd.classList.toggle("open",o);mb.setAttribute("aria-expanded",o);mb.textContent=o?"✕":"☰"}
+function route(){var k=location.hash.replace(/^#\/?/,"")||"home";if(!R[k])k="home";if(k=="admin"&&ADM){location.hash="#/";return}Q(".pg").forEach(function(p){p.hidden=p.id!="p-"+k});Q("[data-r]").forEach(function(a){if(a.tagName=="A")a.setAttribute("aria-current",a.dataset.r==k?"page":"false")});document.title=(k=="home"?"ИИ, который работает на вас":R[k]+" — ИИ для педагогов");window.scrollTo(0,0);menu(false)}
+addEventListener("hashchange",route);route();
+mb.onclick=function(){menu(!hd.classList.contains("open"))};document.onkeydown=function(e){if(e.key=="Escape")menu(false)};
+$("th").onclick=function(){var d=document.documentElement,dark=d.dataset.theme?d.dataset.theme=="dark":matchMedia("(prefers-color-scheme:dark)").matches;d.dataset.theme=dark?"light":"dark"};
+/* Демо-лист */
+var T=[["Подготовить занятие","План урока «Дроби», 5 класс, 45 минут",["Актуализация знаний — 5 мин","Новый материал — [30|15] мин","Практика, три уровня — 15 мин","Проверка понимания — 10 мин"]],
+["Создать презентацию","Презентация для родительского собрания: итоги четверти",["Слайд 1. Итоги четверти","Слайд 2. [Разбор каждого ученика|Три главных вывода]","Слайд 3. Планы на новую четверть"]],
+["Составить задание","Задание по дробям для 5 класса с критериями",["Вычислите: 1/2 + 1/4","Ответ: [2/6|3/4]","Критерий: верный общий знаменатель"]],
+["Проанализировать документ","Выдели из приказа сроки и ответственных",["Ответственный: заместитель директора","Срок: [10 марта|5 марта]","Действие: подготовить список участников"]],
+["Подготовить отчёт","Структура отчёта за полугодие по моим заметкам",["Проведено 12 семинаров","Охват педагогов: [95%|нужны данные]","Вывод: динамика положительная"]],
+["Разработать план","План методического объединения на четверть",["Сентябрь — входная диагностика","Ноябрь — [экскурсия|взаимопосещение уроков]","Декабрь — итоги и выводы"]]];
+var pr=$("pr"),ls=$("ls"),sh=$("sheet"),sts=[].slice.call($("sts").children),chips=$("chips"),rm=matchMedia("(prefers-reduced-motion:reduce)").matches,tm=[],cur=0,auto=true;
+function at(f,ms){tm.push(setTimeout(f,ms))}
+function build(L){ls.textContent="";L.forEach(function(l){var d=document.createElement("div");d.className="ln";var m=l.match(/^(.*)\[(.*)\|(.*)\](.*)$/);if(m){d.append(m[1]);var a=document.createElement("span");a.className="w2";a.textContent=m[2];var f=document.createElement("span");f.className="fx";f.textContent=m[3];d.append(a,f,m[4])}else d.textContent=l;ls.appendChild(d)})}
+function lit(n){sts.forEach(function(s,k){s.className=k<=n?"on":""})}
+function run(i){tm.forEach(clearTimeout);tm=[];cur=i;[].forEach.call(chips.children,function(c,k){c.setAttribute("aria-pressed",k==i)});var t=T[i];sh.className="sheet";pr.textContent="";build(t[2]);lit(0);var rows=ls.children,n=0;
+function fin(){if(auto&&!rm)at(function(){$("p-home").hidden?fin():run((cur+1)%T.length)},5000)}
+if(rm){pr.textContent=t[1];[].forEach.call(rows,function(r){r.classList.add("in")});sh.className="sheet chk fix done";lit(4);return}
+(function typ(){n+=2;pr.textContent=t[1].slice(0,n);if(n<t[1].length){at(typ,26);return}lit(1);var k=0;(function nx(){if(k<rows.length){rows[k++].classList.add("in");at(nx,380);return}at(function(){sh.classList.add("chk");lit(2)},500);at(function(){sh.classList.add("fix");lit(3)},1200);at(function(){sh.classList.add("done");lit(4);fin()},2200)})()})()}
+T.forEach(function(t,i){var b=document.createElement("button");b.className="chip";b.type="button";b.textContent=t[0];b.onclick=function(){auto=false;run(i)};chips.appendChild(b)});run(0);
+var h=$("hero");h.addEventListener("pointermove",function(e){var r=h.getBoundingClientRect();h.style.setProperty("--mx",(e.clientX-r.left)+"px");h.style.setProperty("--my",(e.clientY-r.top)+"px")});
+/* Формы */
+function done(id){var o=$(id);o.hidden=false;o.focus&&o.focus()}
+$("f1").onsubmit=function(e){e.preventDefault();done("ok1");this.reset()};
+$("f2").onsubmit=function(e){e.preventDefault();var f=this,b="Имя: "+f.n.value+"\nКонтакт: "+f.c.value+"\nПрограмма: "+f.p.value+"\nЗадача: "+f.t.value;var a=document.createElement("a");a.href="mailto:"+S.ml+"?subject="+encodeURIComponent("Заявка на обучение")+"&body="+encodeURIComponent(b);document.body.appendChild(a);a.click();a.remove();done("ok2")};
+/* ===== настройки и конструктор ===== */
+var D=function(){return{c1:"",c2:"",c3:"",ft:"",fs:17,e1:1,e2:1,e3:1,hid:[],ml:"hello@example.com",tx:{},ph:"",pw:"admin",cr:[],gid:""}},S=D();
+try{Object.assign(S,JSON.parse(localStorage.getItem("cfg")||"{}"))}catch(e){}if(!Array.isArray(S.cr))S.cr=[];
+var ADM=0;try{ADM=sessionStorage.getItem("adm")=="1"}catch(e){}
+function save(){$("js").value=JSON.stringify(S);try{localStorage.setItem("cfg",JSON.stringify(S))}catch(e){$("sv").textContent="Не удалось сохранить: память браузера недоступна";return}$("sv").textContent="Сохранено ✓"}
+function ap(){var s=document.documentElement.style;[["c1","--vio"],["c2","--tl"],["c3","--navy"]].forEach(function(p){S[p[0]]?s.setProperty(p[1],S[p[0]]):s.removeProperty(p[1])});S.ft?s.setProperty("--f",S.ft):s.removeProperty("--f");document.body.style.fontSize=S.fs+"px";
+Q("#p-home>section,#p-home>.mq").forEach(function(e,i){if(!e.classList.contains("hero"))e.style.display=S.hid.indexOf(i)>-1?"none":""});
+var p=Q(".ph")[0];p.style.background=S.ph?"url("+S.ph+") center/cover":"";p.querySelector("svg").style.display=S.ph?"none":"";p.querySelector("span").style.display=S.ph?"none":""}
+function eds(){return Q("main h1,main h2,main h3,main p,main li,main blockquote,main figcaption b,main .st b,main .st span,.hd>a b,footer span").filter(function(e){return!e.children.length&&!e.closest(".sheet,#pl,#out,#res,#cap,#pt,#p-admin,#p-courses,.chips,.sts")})}
+function ed(on){document.body.classList.toggle("edit",on);eds().forEach(function(e){on?e.setAttribute("contenteditable","true"):e.removeAttribute("contenteditable")})}
+function am(on){document.body.classList.toggle("adm",on);$("adm").hidden=!on;$("af").hidden=true;ed(on&&$("ae").checked)}
+eds().forEach(function(e,i){if(typeof S.tx[i]=="string")e.textContent=S.tx[i]});ap();
+$("sc").innerHTML=Q("#p-home>section,#p-home>.mq").map(function(e,i){if(e.classList.contains("hero"))return"";var h=e.querySelector("h2");return"<label>"+(h?h.textContent.slice(0,26).replace(/[<>&\"]/g,""):"Бегущая строка")+'<input type="checkbox" data-h="'+i+'"'+(S.hid.indexOf(i)>-1?"":" checked")+"></label>"}).join("");
+$("c1").value=S.c1||"#6b5ce7";$("c2").value=S.c2||"#22d3c5";$("c3").value=S.c3||"#101C3A";$("ft").value=S.ft;$("fs").value=S.fs;$("ml").value=S.ml;["e1","e2","e3"].forEach(function(k){$(k).checked=!!S[k]});$("js").value=JSON.stringify(S);
+["c1","c2","c3"].forEach(function(k){$(k).oninput=function(){S[k]=this.value;ap();save()}});
+$("ft").onchange=function(){S.ft=this.value;ap();save()};$("fs").oninput=function(){S.fs=+this.value;ap();save()};
+["e1","e2","e3"].forEach(function(k){$(k).onchange=function(){S[k]=this.checked?1:0;if(k=="e2"&&!S.e2)Q(".rv2").forEach(function(e){e.classList.add("on")});save()}});
+$("ml").oninput=function(){S.ml=this.value;save()};$("np").onchange=function(){if(this.value){S.pw=this.value;save();this.value=""}};$("ae").onchange=function(){ed(this.checked)};
+$("sc").onchange=function(e){var i=+e.target.dataset.h;S.hid=S.hid.filter(function(x){return x!=i});if(!e.target.checked)S.hid.push(i);ap();save()};
+$("ph").onchange=function(){var f=this.files[0];if(!f)return;var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var c=document.createElement("canvas"),k=Math.min(1,700/im.width);c.width=im.width*k;c.height=im.height*k;c.getContext("2d").drawImage(im,0,0,c.width,c.height);S.ph=c.toDataURL("image/jpeg",.82);ap();save()};im.src=r.result};r.readAsDataURL(f)};
+$("jc").onclick=function(){cp($("js").value,this,"Скопировать")};
+$("ja").onclick=function(){try{var o=JSON.parse($("js").value);if(!o||typeof o!="object")throw 0;S=Object.assign(D(),o);save();location.reload()}catch(e){$("sv").textContent="Некорректный JSON"}};
+$("jr").onclick=function(){if(!confirm("Сбросить все настройки и курсы?"))return;try{localStorage.removeItem("cfg")}catch(e){}location.reload()};
+$("ax").onclick=function(){$("adm").hidden=true;$("af").hidden=false};$("af").onclick=function(){$("adm").hidden=false;$("af").hidden=true};
+Q(".lo").forEach(function(b){b.onclick=function(){ADM=0;try{sessionStorage.removeItem("adm")}catch(e){}am(0);menu(false);location.hash="#/"}});
+$("f3").onsubmit=function(e){e.preventDefault();if($("pw").value==S.pw){ADM=1;try{sessionStorage.setItem("adm","1")}catch(x){}am(1);location.hash="#/"}else $("bad").hidden=false};
+document.addEventListener("input",function(e){var i=eds().indexOf(e.target);if(i>-1){S.tx[i]=e.target.textContent;save()}});
+document.addEventListener("keydown",function(e){if(e.key=="Enter"&&e.target.isContentEditable)e.preventDefault()});
+document.addEventListener("click",function(e){if(document.body.classList.contains("edit")&&e.target.closest(".hd>a"))e.preventDefault()});
+/* ===== курсы ===== */
+function vm(u){u=(u||"").trim();var m;
+if(m=u.match(/drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?(?:[^#]*&)?id=)([\w-]{10,})/))return{k:"f",s:"https://drive.google.com/file/d/"+m[1]+"/preview"};
+if(m=u.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:[^#]*&)?v=|embed\/|shorts\/))([\w-]{11})/))return{k:"f",s:"https://www.youtube-nocookie.com/embed/"+m[1]};
+if(m=u.match(/vimeo\.com\/(?:video\/)?(\d+)/))return{k:"f",s:"https://player.vimeo.com/video/"+m[1]};
+if(/^https:\/\/[^\s"'<>]+\.(mp4|webm|ogg)(\?[^\s"'<>]*)?$/i.test(u))return{k:"v",s:u};return null}
+function rc(){var g=$("cg");g.textContent="";if(!S.cr.length){var e=document.createElement("p");e.className="lead";e.textContent="Курсы скоро появятся.";g.appendChild(e)}
+S.cr.forEach(function(c){var v=vm(c.v),d=document.createElement("article"),b=document.createElement("div"),h=document.createElement("h3"),p=document.createElement("p");d.className="cc";
+if(v){var m=document.createElement(v.k=="f"?"iframe":"video");m.className="vd";m.src=v.s;if(v.k=="f"){m.allow="autoplay; fullscreen; picture-in-picture";m.allowFullscreen=true;m.loading="lazy";m.title=c.t}else{m.controls=true;m.preload="metadata"}d.appendChild(m)}
+h.textContent=c.t;p.textContent=c.d;b.append(h,p);d.appendChild(b);g.appendChild(d)})}
+var ei=-1;
+function kr(){ei=-1;$("kt").value=$("kd").value=$("kv").value="";$("kb").textContent="Добавить курс";$("kc").hidden=true}
+function kl(){var l=$("kl");l.textContent="";S.cr.forEach(function(c,i){var r=document.createElement("div"),s=document.createElement("span"),w=document.createElement("span"),a=document.createElement("button"),x=document.createElement("button");s.textContent=c.t;a.className=x.className="chip";a.type=x.type="button";a.textContent="✎";x.textContent="✕";a.setAttribute("aria-label","Править курс");x.setAttribute("aria-label","Удалить курс");w.style.flex="none";
+a.onclick=function(){ei=i;$("kt").value=c.t;$("kd").value=c.d;$("kv").value=c.v;$("kb").textContent="Сохранить курс";$("kc").hidden=false};
+x.onclick=function(){if(!confirm("Удалить курс «"+c.t+"»?"))return;S.cr.splice(i,1);kr();rc();kl();save()};
+w.append(a,x);r.append(s,w);l.appendChild(r)})}
+$("kb").onclick=function(){var t=$("kt").value.trim(),v=$("kv").value.trim(),m=$("gs");
+if(!t){m.textContent="Введите название курса.";return}
+if(v&&!vm(v)){m.textContent="Ссылка не распознана. Подойдут Google Диск, YouTube, Vimeo или прямая ссылка на .mp4";return}
+var c={t:t,d:$("kd").value.trim(),v:v};if(ei>-1)S.cr[ei]=c;else S.cr.push(c);kr();rc();kl();save();m.textContent="Курс сохранён ✓"};
+$("kc").onclick=kr;
+/* загрузка видео на Google Диск (Google Identity Services + Drive API) */
+$("gid").value=S.gid;$("gid").onchange=function(){S.gid=this.value.trim();save()};
+function gup(f,t){var m=$("gs"),g=$("gp"),H={Authorization:"Bearer "+t};g.hidden=false;m.textContent="Загрузка: 0%";
+fetch("https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable&fields=id",{method:"POST",headers:Object.assign({"Content-Type":"application/json; charset=UTF-8","X-Upload-Content-Type":f.type||"video/mp4"},H),body:JSON.stringify({name:f.name})})
+.then(function(r){var u=r.headers.get("Location");if(!r.ok||!u)throw 0;return new Promise(function(ok,no){var x=new XMLHttpRequest();x.open("PUT",u);x.upload.onprogress=function(e){if(e.lengthComputable){var p=Math.round(e.loaded/e.total*100);g.firstChild.style.width=p+"%";m.textContent="Загрузка: "+p+"%"}};x.onload=function(){x.status<300?ok(JSON.parse(x.responseText).id):no()};x.onerror=no;x.send(f)})})
+.then(function(id){return fetch("https://www.googleapis.com/drive/v3/files/"+id+"/permissions",{method:"POST",headers:Object.assign({"Content-Type":"application/json"},H),body:JSON.stringify({role:"reader",type:"anyone"})}).then(function(r){if(!r.ok)throw 0;$("kv").value="https://drive.google.com/file/d/"+id+"/view";m.textContent="Готово ✓ Видео на Диске, ссылка подставлена. Нажмите «Добавить курс»."})})
+.catch(function(){m.textContent="Не удалось загрузить. Проверьте Client ID, адрес сайта в настройках Google Cloud и включённый Drive API."}).then(function(){g.hidden=true;g.firstChild.style.width=0})}
+function gtok(f){google.accounts.oauth2.initTokenClient({client_id:S.gid,scope:"https://www.googleapis.com/auth/drive.file",callback:function(r){r.access_token?gup(f,r.access_token):$("gs").textContent="Доступ к Google Диску не выдан."}}).requestAccessToken()}
+$("kf").onchange=function(){var f=this.files[0],m=$("gs");this.value="";if(!f)return;
+if(!S.gid){m.textContent="Укажите Google OAuth Client ID ниже или загрузите видео вручную на Диск и вставьте ссылку.";return}
+if(location.protocol=="file:"){m.textContent="Загрузка на Диск работает, когда сайт открыт по адресу https://…, а не как локальный файл.";return}
+if(window.google&&google.accounts){gtok(f);return}
+var s=document.createElement("script");s.src="https://accounts.google.com/gsi/client";s.onload=function(){gtok(f)};s.onerror=function(){m.textContent="Не удалось загрузить скрипт Google. Проверьте интернет."};document.head.appendChild(s)};
+rc();kl();
+if(ADM)am(1);
+/* ===== эффекты ===== */
+var sp=$("sp");addEventListener("scroll",function(){var d=document.documentElement;sp.style.transform="scaleX("+scrollY/((d.scrollHeight-innerHeight)||1)+")"},{passive:true});
+function cu(b){var m=b.textContent.match(/^(\D*)(\d+)(.*)$/);if(!m||rm)return;var n=+m[2],t0=performance.now();(function s(t){var k=Math.min(1,(t-t0)/1400);b.textContent=m[1]+Math.round(n*(1-Math.pow(1-k,3)))+m[3];if(k<1)requestAnimationFrame(s)})(t0)}
+var io=window.IntersectionObserver&&new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var t=e.target;t.classList.add("on");io.unobserve(t);if(t.matches(".ch"))return;if(t.matches(".st>div"))cu(t.firstElementChild);setTimeout(function(){t.classList.remove("rv2","on")},1100)})},{threshold:.15});
+if(io){io.observe($("ch"));if(S.e2&&!rm)Q(".tile,.pc,.pt,.tl3>div,.cs li,.st>div,.rv figure,.calc>div,.gf,.bld,.ph,.big,section h2").forEach(function(e){e.classList.add("rv2");e.style.setProperty("--d",[].indexOf.call(e.parentNode.children,e)%4*.09+"s");io.observe(e)})}else $("ch").classList.add("on");
+if(!rm&&matchMedia("(hover:hover)").matches)Q(".tile,.pc,.tl3>div").forEach(function(e){e.classList.add("tl");e.onpointermove=function(a){if(!S.e3)return;var r=e.getBoundingClientRect();e.style.setProperty("--ry",((a.clientX-r.left)/r.width-.5)*8+"deg");e.style.setProperty("--rx",(.5-(a.clientY-r.top)/r.height)*8+"deg")};e.onpointerleave=function(){e.style.removeProperty("--rx");e.style.removeProperty("--ry")}});
+(function(){var c=$("cv"),x=c.getContext("2d"),P=[],W=0,H=0,m={x:-999,y:-999},vc="#6b5ce7";
+function sz(){var r=h.getBoundingClientRect();W=c.width=r.width;H=c.height=r.height;P=[];for(var i=0,n=Math.min(70,W*H/15000|0);i<n;i++)P.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.45,vy:(Math.random()-.5)*.45})}
+h.addEventListener("pointermove",function(e){var r=h.getBoundingClientRect();m.x=e.clientX-r.left;m.y=e.clientY-r.top});h.addEventListener("pointerleave",function(){m.x=m.y=-999});addEventListener("resize",function(){W=0});
+setInterval(function(){vc=getComputedStyle(document.documentElement).getPropertyValue("--vio").trim()||vc},800);
+function f(){requestAnimationFrame(f);if(!S.e1||rm||$("p-home").hidden||scrollY>H+200&&W)return;if(!W)sz();x.clearRect(0,0,W,H);x.fillStyle=x.strokeStyle=vc;
+P.forEach(function(p,i){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;x.globalAlpha=.55;x.beginPath();x.arc(p.x,p.y,2.2,0,6.3);x.fill();
+for(var j=i+1;j<P.length;j++){var q=P[j],d=Math.hypot(p.x-q.x,p.y-q.y);if(d<120){x.globalAlpha=(1-d/120)*.35;x.beginPath();x.moveTo(p.x,p.y);x.lineTo(q.x,q.y);x.stroke()}}
+var dm=Math.hypot(p.x-m.x,p.y-m.y);if(dm<160){x.globalAlpha=(1-dm/160)*.6;x.beginPath();x.moveTo(p.x,p.y);x.lineTo(m.x,m.y);x.stroke()}});x.globalAlpha=1}f()})();
+</script>
+</body>
+</html>
